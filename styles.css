@@ -1,0 +1,13 @@
+body {
+    margin: 50px;
+}
+
+#colors {
+    display: grid;
+}
+
+#colors div {
+    background-color: red;
+    height: 100px;
+    width: 90px;
+}
