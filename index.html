@@ -9,12 +9,27 @@
     </head>
     <body>
         <main>
-            <div id="header">
-                <input type="color" value="#F55A5A">
-                <select>
+            <form>
+                <label for="colorPicker" class="sr-only">Pick a color</label>
+                <input type="color" id="colorPicker" value="#F55A5A">
+                <label for="schemeType" class="sr-only">Scheme type</label>
+                <select id="schemeType">
                     <option selected>Monochrome</option>
+                    <option>Monochrome Dark</option>
+                    <option>Monochrome Light</option>
+                    <option>Analogic</option>
+                    <option>Complement</option>
+                    <option>Analogic Complement</option>
+                    <option>Triad</option>
+                    <option>Quad</option>
                 </select>
-                <button type="button">Get color scheme</button>
+                <button type="submit">Get color scheme</button>
+            </form>
+            <div id="colors">
+                <div class="color">
+                    <div></div>
+                    <p>#F55A5A</p>
+                </div>
             </div>
         </main>
     </body>
