@@ -1,13 +1,59 @@
 body {
-    margin: 50px;
+    margin: 0;
+    font-family: "Inter", sans-serif;
 }
 
-#colors {
-    display: grid;
+#header {
+    margin-top: 24px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
 }
 
-#colors div {
-    background-color: red;
-    height: 100px;
-    width: 90px;
+input {
+    width: 63px;
+    height: 45px;
+    border: none;
+    cursor: pointer;
+    padding: 0px 1.5px;
+}
+
+select {
+    padding: 11px 210px 11px 13px;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 1rem;
+    border: 1px solid #D1D5DB;
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%239CA3AF%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center; /* Positions arrow on the right side */
+    background-size: 26px; /* Increase or decrease this value to change the arrow size */
+}
+
+button {
+    background-color: transparent;
+    border: 1px solid #D1D5DB;
+    border-radius: 4px;
+    padding: 13px 11px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+input,
+button {
+    cursor: pointer;
+}
+
+select,
+button {
+    box-shadow:
+      0 1px 2px 0 rgba(0, 0, 0, 0.025),
+      0 2px 4px 0 rgba(0, 0, 0, 0.035);
 }
