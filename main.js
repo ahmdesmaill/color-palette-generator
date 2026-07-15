@@ -11,27 +11,36 @@ let colorsToRender = [
 ];
 
 function renderColors() {
-  let html = "";
+  colorsContainer.innerHTML = "";
   colorsToRender.forEach(color => {
-    html += `
-    <div class="color">
-        <div style="background-color: ${color};"></div>
-        <p>${color}</p>
-    </div>
-    `;
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("color");
+
+    const swatch = document.createElement("div");
+    swatch.style.backgroundColor = color;
+
+    const label = document.createElement("p");
+    label.textContent = color;
+
+    wrapper.append(swatch, label);
+    colorsContainer.append(wrapper);
   });
-  colorsContainer.innerHTML = html;
 }
+
+const hexPattern = /^#[0-9A-Fa-f]{6}$/;
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   const formData = new FormData(form);
+  if (!hexPattern.test(formData.get("color"))) return;
+
   fetch(`https://www.thecolorapi.com/scheme?hex=${formData.get("color").substring(1)}&count=5&format=json&mode=${formData.get("scheme-mode")}`)
     .then(res => res.json())
     .then(data => {
       colorsToRender = [];
       data.colors.forEach(color => {
-        colorsToRender.push(color.hex.value);
+        const hex = color.hex.value;
+        if (hexPattern.test(hex)) colorsToRender.push(hex);
       });
       renderColors();
     });
