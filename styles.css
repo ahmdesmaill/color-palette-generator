@@ -29,18 +29,16 @@ form {
     padding: 0;
     margin: -1px;
     overflow: hidden;
-    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
     white-space: nowrap;
     border: none;
 }
 
 input {
     width: clamp(50px, 7vw, 180px);
-    height: clamp(38px, 4.5vw, 95px);
-    border: 1.5px solid #D1D5DB;
-    border-radius: 0.3em;
-    padding: 2px;
-    background: none;
+    height: clamp(40px, 4.5vw, 95px);
+    border: none;
+    background: #E5E5E5;
 }
 
 select {
@@ -108,7 +106,7 @@ button {
     }
 
     select {
-        max-width: 100%;
+        max-width: 90%;
     }
 
     .color p {
