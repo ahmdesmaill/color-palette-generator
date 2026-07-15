@@ -8,6 +8,8 @@ let colorsToRender = [
   "#AAD1B6",
   "#A626D3"
 ];
+const touchDevicesLabel = document.getElementById("touch-devices-label");
+const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
 const hexPattern = /^#[0-9A-Fa-f]{6}$/;
 
 function renderColors() {
@@ -19,16 +21,18 @@ function renderColors() {
     const swatch = document.createElement("div");
     swatch.style.backgroundColor = color;
 
-    // Hover box
-    swatch.addEventListener("mousemove", (event) => {
-      hoverBox.style.display = 'flex';
-      // Move it to the mouse coordinates + the offset from the hover-box CSS transform property
-      hoverBox.style.left = `${event.clientX}px`;
-      hoverBox.style.top = `${event.clientY}px`;
-    })
-    swatch.addEventListener('mouseleave', (event) => {
-      hoverBox.style.display = 'none';
-    });
+    if (!isTouchDevice) {
+      // Hover box
+      swatch.addEventListener("mousemove", (event) => {
+        hoverBox.style.display = 'flex';
+        // Move it to the mouse coordinates + the offset from the hover-box CSS transform property
+        hoverBox.style.left = `${event.clientX}px`;
+        hoverBox.style.top = `${event.clientY}px`;
+      })
+      swatch.addEventListener('mouseleave', (event) => {
+        hoverBox.style.display = 'none';
+      });
+    }
 
     // Color copying
     swatch.addEventListener("click", (event) => {
@@ -86,21 +90,29 @@ async function fetchData(url, options) {
   }
 }
 
-form.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  const formData = new FormData(form);
-  if (!hexPattern.test(formData.get("color"))) return;
-  const { errorOrData, success } = await fetchData(`https://www.thecolorapi.com/scheme?hex=${formData.get("color").substring(1)}&count=5&format=json&mode=${formData.get("scheme-mode")}`);
-  if (success && errorOrData?.colors) {
-    colorsToRender = [];
-    errorOrData.colors.forEach(color => {
-      const hex = color.hex.value;
-      if (hexPattern.test(hex)) colorsToRender.push(hex);
-    });
-    renderColors();
-  } else {
-    alert(`It looks like there is a problem at the moment, please try again later. Error Message: ${errorOrData}`);
-  }
-})
+function main() {
+  renderColors();
 
-renderColors();
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const formData = new FormData(form);
+    if (!hexPattern.test(formData.get("color"))) return;
+    const { errorOrData, success } = await fetchData(`https://www.thecolorapi.com/scheme?hex=${formData.get("color").substring(1)}&count=5&format=json&mode=${formData.get("scheme-mode")}`);
+    if (success && errorOrData?.colors) {
+      colorsToRender = [];
+      errorOrData.colors.forEach(color => {
+        const hex = color.hex.value;
+        if (hexPattern.test(hex)) colorsToRender.push(hex);
+      });
+      renderColors();
+    } else {
+      alert(`It looks like there is a problem at the moment, please try again later. Error Message: ${errorOrData}`);
+    }
+  })
+
+  if (isTouchDevice) {
+    touchDevicesLabel.style.display = "Block";
+  }
+}
+
+main();

@@ -134,3 +134,10 @@ button {
 #hover-box span {
     white-space: nowrap;
 }
+
+#touch-devices-label {
+    background-color: yellow;
+    align-self: center;
+    font-size: 3.8vw;
+    display: none;
+}
