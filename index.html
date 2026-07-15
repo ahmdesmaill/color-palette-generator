@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Generate beautiful color schemes from a base color. Choose from monochrome, analogic, complement, triad, and quad schemes.">
         <title>Color Scheme Generator ✨</title>
-        <link rel="stylesheet" href="./styles.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="./styles.css">
         <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
         <script type="module" src="./main.js" defer></script>
     </head>
@@ -27,9 +30,10 @@
                 </select>
                 <button type="submit">Get color scheme</button>
             </form>
-            <p id="touch-devices-label">You can click on a color to copy it</p>
+            <small id="touch-devices-label" role="status">You can click on a color to copy it</small>
             <div id="colors" aria-live="polite" aria-label="Color palette"></div>
         </main>
         <div id="hover-box"><span>Click to copy</span></div>
+        <div style="background-color: #1a1a1a;"></div>
     </body>
 </html>

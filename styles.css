@@ -111,6 +111,7 @@ button {
 
     .color p {
         padding: clamp(5px, 3.5vh, 22px) 0;
+        font-size: 0.85rem;
     }
 }
 
@@ -140,4 +141,27 @@ button {
     align-self: center;
     font-size: 3.8vw;
     display: none;
+    margin-bottom: 0.75em;
+}
+
+#toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(120%);
+    background: #1f2937;
+    color: #fff;
+    padding: 0.75em 1.5em;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 1000;
+    max-width: 90vw;
+    text-align: center;
+}
+
+#toast.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
 }

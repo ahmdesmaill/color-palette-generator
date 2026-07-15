@@ -12,6 +12,46 @@ const touchDevicesLabel = document.getElementById("touch-devices-label");
 const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
 const hexPattern = /^#[0-9A-Fa-f]{6}$/;
 
+function showErrorToast(message) {
+  let toast = document.getElementById("toast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "toast";
+    toast.setAttribute("role", "alert");
+    document.body.append(toast);
+  }
+  toast.textContent = message;
+  toast.classList.add("visible");
+  clearTimeout(toast._timer) // This won't error if _timer is still undefined;
+  toast._timer = setTimeout(() => toast.classList.remove("visible"), 3500);
+}
+
+async function copyColor(color, event, element) {
+  try {
+    await navigator.clipboard.writeText(color);
+    let originX, originY;
+    if (event.clientX && event.clientY) {
+      originX = event.clientX / window.innerWidth;
+      originY = event.clientY / window.innerHeight;
+    } else {
+      const rect = element.getBoundingClientRect();
+      originX = (rect.left + rect.width / 2) / window.innerWidth;
+      originY = (rect.top + rect.height / 2) / window.innerHeight;
+    }
+    confetti({
+      particleCount: 50,
+      spread: 25,
+      colors: ["#ffffff", "#ffeb3b"],
+      origin: { x: originX, y: originY },
+      gravity: 1.5,
+      decay: 0.87,
+      ticks: 160,
+    });
+  } catch (error) {
+    showErrorToast(`Failed to copy ${color}: ${error.message}`);
+  }
+}
+
 function renderColors() {
   colorsContainer.innerHTML = "";
   colorsToRender.forEach(color => {
@@ -19,6 +59,9 @@ function renderColors() {
     wrapper.classList.add("color");
 
     const swatch = document.createElement("div");
+    swatch.setAttribute("aria-label", `Copy color ${color}`);
+    swatch.setAttribute("role", "button");
+    swatch.setAttribute("tabindex", "0");
     swatch.style.backgroundColor = color;
 
     if (!isTouchDevice) {
@@ -36,31 +79,14 @@ function renderColors() {
 
     // Color copying
     swatch.addEventListener("click", (event) => {
-      navigator.clipboard.writeText(color)
-        .then(() => {
-          // 1. Calculate mouse coordinates
-          const targetX = event.clientX;
-          const targetY = event.clientY;
-
-          // 2. Convert pixel locations to window percentage scale (0.0 to 1.0)
-          const originX = targetX / window.innerWidth;
-          const originY = targetY / window.innerHeight;
-
-          // 3. Fire the confetti at that exact position
-          confetti({
-            particleCount: 50,
-            spread: 25,
-            colors: ['#ffffff', '#ffeb3b',],
-            origin: { x: originX, y: originY },
-            gravity: 1.5,
-            decay: 0.87,
-            ticks: 160,
-          });
-        })
-        .catch(error => {
-          alert(`Failed to copy color, error message: ${error}`);
-        })
-    })
+      copyColor(color, event, swatch);
+    });
+    swatch.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        copyColor(color, event, swatch);
+      }
+    });
 
     const label = document.createElement("p");
     label.textContent = color;
@@ -106,7 +132,7 @@ function main() {
       });
       renderColors();
     } else {
-      alert(`It looks like there is a problem at the moment, please try again later. Error Message: ${errorOrData}`);
+      showErrorToast(`It looks like there is a problem at the moment, please try again later. Error Message: ${errorOrData}`);
     }
   })
 
