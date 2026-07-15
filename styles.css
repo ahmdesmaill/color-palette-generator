@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: "Inter", sans-serif;
@@ -11,18 +15,13 @@ main {
     height: 100vh;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 form {
     padding: clamp(15px, 3vw, 35px) 0;
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: clamp(12px, 2vw, 24px);
-    font-size: clamp(1rem, 1.5vw, 2rem);
+    font-size: clamp(1rem, 1.75vw, 2.25rem);
 }
 
 .sr-only {
@@ -38,19 +37,21 @@ form {
 }
 
 input {
-    width: clamp(50px, 7vw, 160px);
+    width: clamp(50px, 7vw, 180px);
     height: clamp(38px, 4.5vw, 95px);
-    border: none;
-    cursor: pointer;
-    padding: 0;
+    border: 1.5px solid #D1D5DB;
+    border-radius: 0.3em;
+    padding: 2px;
+    background: none;
+    appearance: none;
+    -webkit-appearance: none;
 }
 
 select {
     font-size: inherit;
     padding: 0.7em 2.2em 0.7em 0.8em;
     flex: 1;
-    min-width: 0;
-    max-width: clamp(200px, 30vw, 600px);
+    max-width: clamp(200px, 40vw, 900px);
     border-radius: 0.4em;
     font-family: inherit;
     border: 1px solid #D1D5DB;
@@ -62,6 +63,7 @@ select {
     background-repeat: no-repeat;
     background-position: right 0.7em center;
     background-size: 1.6em;
+    background-color: transparent;
 }
 
 button {
@@ -79,15 +81,7 @@ button,
     cursor: pointer;
 }
 
-@media (max-width: 500px) {
-    form {
-        flex-direction: column;
-    }
 
-    select {
-        max-width: 100%;
-    }
-}
 
 select,
 button {
@@ -109,12 +103,31 @@ button {
 .color div {
     width: 100%;
     height: 90%;
-    background-color: #F55A5A;
 }
 
 .color p {
     text-align: center;
     margin: 0;
-    padding: clamp(5px, 4vh, 39px) 0;
+    padding: clamp(5px, 3.5vh, 35px) 0;
     font-size: clamp(1.1rem, 3.2vw, 1.9rem);
+}
+
+@media (max-width: 500px) {
+    form {
+        flex-direction: column;
+    }
+
+    select {
+        max-width: 100%;
+    }
+
+    .color p {
+        padding: clamp(5px, 3.5vh, 22px) 0;
+    }
+}
+
+@media (min-width: 635px) {
+    .color p {
+        padding: 15px 0;
+    }
 }

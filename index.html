@@ -6,28 +6,29 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet">
+        <script type="module" src="./main.js" defer></script>
     </head>
     <body>
         <main>
-            <form>
-                <label for="colorPicker" class="sr-only">Pick a color</label>
-                <input type="color" id="colorPicker" value="#F55A5A">
-                <label for="schemeType" class="sr-only">Scheme type</label>
-                <select id="schemeType">
-                    <option selected>Monochrome</option>
-                    <option>Monochrome Dark</option>
-                    <option>Monochrome Light</option>
-                    <option>Analogic</option>
-                    <option>Complement</option>
-                    <option>Analogic Complement</option>
-                    <option>Triad</option>
-                    <option>Quad</option>
+            <form id="get-colors-form">
+                <label for="color-picker" class="sr-only">Pick a color</label>
+                <input type="color" name="color" id="color-picker" value="#F55A5A">
+                <label for="scheme-mode" class="sr-only">Scheme mode</label>
+                <select name="scheme-mode" id="scheme-mode">
+                    <option value="monochrome" selected>Monochrome</option>
+                    <option value="monochrome-dark">Monochrome Dark</option>
+                    <option value="monochrome-light">Monochrome Light</option>
+                    <option value="analogic">Analogic</option>
+                    <option value="complement">Complement</option>
+                    <option value="analogic-complement">Analogic Complement</option>
+                    <option value="triad">Triad</option>
+                    <option value="quad">Quad</option>
                 </select>
                 <button type="submit">Get color scheme</button>
             </form>
             <div id="colors">
                 <div class="color">
-                    <div></div>
+                    <div style="background-color: red;"></div>
                     <p>#F55A5A</p>
                 </div>
             </div>
