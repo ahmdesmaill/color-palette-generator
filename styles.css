@@ -31,7 +31,7 @@ form {
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
-    border: 0;
+    border: none;
 }
 
 input {
@@ -44,14 +44,10 @@ input {
 }
 
 select {
-    font-size: inherit;
     padding: 0.7em 2.2em 0.7em 0.8em;
     flex: 1;
     max-width: clamp(200px, 40vw, 900px);
     border-radius: 0.4em;
-    font-family: inherit;
-    border: 1px solid #D1D5DB;
-    background-color: transparent;
 
     /* Hide the default browser arrow */
     appearance: none;
@@ -65,12 +61,8 @@ select {
 }
 
 button {
-    border: 1px solid #D1D5DB;
     border-radius: 0.3em;
     padding: 0.8em 0.7em;
-    font-family: inherit;
-    font-size: inherit;
-    background-color: transparent;
 }
 
 input,
@@ -84,6 +76,10 @@ button {
     box-shadow:
       0 1px 2px 0 rgba(0, 0, 0, 0.025),
       0 2px 4px 0 rgba(0, 0, 0, 0.035);
+    font-family: inherit;
+    font-size: inherit;
+    background-color: transparent;
+    border: 1px solid #D1D5DB;
 }
 
 #colors {
@@ -124,4 +120,19 @@ button {
     .color p {
         padding: 15px 0;
     }
+}
+
+#hover-box {
+    position: fixed;
+    display: none;
+    font-size: 3vw;
+    align-items: center;
+    justify-content: center;
+    background-color: yellow;
+    border-radius: 2px;
+    pointer-events: none; /* Stops flickering */
+    transform: translate(13px, 13px); /* Slightly offsets it from the cursor */
+}
+#hover-box span {
+    white-space: nowrap;
 }
