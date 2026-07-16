@@ -8,9 +8,13 @@ let colorsToRender = [
   "#AAD1B6",
   "#A626D3"
 ];
-const touchDevicesLabel = document.getElementById("touch-devices-label");
 const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
 const hexPattern = /^#[0-9A-Fa-f]{6}$/;
+let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+function setTheme() {
+  document.body.dataset.theme = isDarkMode ? "dark" : "";
+}
 
 function showErrorToast(message) {
   let toast = document.getElementById("toast");
@@ -117,6 +121,7 @@ async function fetchData(url, options) {
 }
 
 function main() {
+  setTheme();
   renderColors();
 
   form.addEventListener("submit", async (event) => {
@@ -137,8 +142,13 @@ function main() {
   })
 
   if (isTouchDevice) {
-    touchDevicesLabel.style.display = "Block";
+    document.getElementById("touch-devices-label").style.display = "Block";
   }
+
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener("change", event => {
+    isDarkMode = event.matches;
+    setTheme();
+  });
 }
 
 main();

@@ -2,9 +2,24 @@
   box-sizing: border-box;
 }
 
+:root {
+  --color-bg: #ffffff;
+  --color-text: #1F2937;
+  --color-surface: transparent;
+  --color-border: #D1D5DB;
+}
+
+body[data-theme="dark"] {
+  --color-bg: #1F2937;
+  --color-text: #D5D4D8;
+  --color-surface: #3D4B60;
+  --color-border: transparent;
+}
+
 body {
     margin: 0;
     font-family: "Inter", sans-serif;
+    background-color: var(--color-bg);
 }
 
 main {
@@ -46,6 +61,9 @@ select {
     flex: 1;
     max-width: clamp(200px, 40vw, 900px);
     border-radius: 0.4em;
+    color: var(--color-text);
+    background-color: transparent;
+    border: 1px solid #D1D5DB;
 
     /* Hide the default browser arrow */
     appearance: none;
@@ -61,6 +79,9 @@ select {
 button {
     border-radius: 0.3em;
     padding: 0.8em 0.7em;
+    color: var(--color-text);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
 }
 
 input,
@@ -76,8 +97,6 @@ button {
       0 2px 4px 0 rgba(0, 0, 0, 0.035);
     font-family: inherit;
     font-size: inherit;
-    background-color: transparent;
-    border: 1px solid #D1D5DB;
 }
 
 #colors {
@@ -98,6 +117,7 @@ button {
     margin: 0;
     padding: clamp(5px, 3.5vh, 35px) 0;
     font-size: clamp(1.1rem, 3.2vw, 1.9rem);
+    color: var(--color-text);
 }
 
 @media (max-width: 500px) {
